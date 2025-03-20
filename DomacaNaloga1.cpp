@@ -122,6 +122,12 @@ int main(int argc, char* argv[])
             DIndex.push_back(i);
         }
 
+        cout << endl << "Izbrani biti iz vsake stevilke (bit " << bit << "):" << endl;
+        for (int i = 0; i < D.size(); i++) {
+            cout << "Index:" << DIndex[i] << " " << D[i] << " ";
+        }
+
+        cout << endl;
         
         bit++;
         counter++;
