@@ -41,6 +41,17 @@ int getMinValue(vector<int> A) {
     return minVal;
 }
 
+int getMaxValue(vector<int> A) {
+    int maxVal = A[0];
+    for (int i = 1; i < A.size(); i++)
+    {
+        if (A[i] > maxVal)
+        {
+            maxVal = A[i];
+        }
+    }
+    return maxVal;
+}
 
 int main(int argc, char* argv[])
 {
