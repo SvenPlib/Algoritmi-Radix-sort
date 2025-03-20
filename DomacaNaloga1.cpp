@@ -145,6 +145,13 @@ int main(int argc, char* argv[])
         }
 
         A = A_sorted;
+
+        cout << endl << "Urejeno A po bitu " << bit + 1<< ":" << endl;
+        for (int i = 0; i < A.size(); i++) {
+            cout << (int)A[i] << " ";
+        }
+
+        cout << endl << endl;
         
         bit++;
         counter++;
