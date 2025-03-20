@@ -110,19 +110,52 @@ int main(int argc, char* argv[])
         vector<int> D;
         vector<int> DIndex;
 
-        cout << "Decimalna -> Binarna " << endl;
+        //cout << "Decimalna -> Binarna " << endl;
         for (int i = 0; i < A.size(); i++) {
-            cout << (int)A[i] << " -> ";
+            /*cout << (int)A[i] << " -> ";
             for (int k = 7; k >= 0; k--) {
                 cout << ((A[i] >> k) & 1);
             }
             cout << endl;
-            
+            */
             D.push_back((A[i] >> bit) & 1);
             DIndex.push_back(i);
         }
 
-        
+        /*
+        cout << endl << "Izbrani biti iz vsake stevilke (bit " << bit << "):" << endl;
+        for (int i = 0; i < D.size(); i++) {
+            cout << "Index:" << DIndex[i] << " " << D[i] << " ";
+        }
+
+        cout << endl;
+        */
+        countingSort(D, DIndex);
+
+        /*
+        cout << endl << "Izbrani biti iz vsake stevilke (bit " << bit << "):" << endl;
+        for (int i = 0; i < D.size(); i++) {
+
+            cout << "Index:" << DIndex[i] << " " << D[i] << " ";
+        }
+
+        cout << endl;
+        */
+        vector<unsigned char> A_sorted(A.size());
+        for (int i = 0; i < A.size(); i++) {
+            A_sorted[i] = A[DIndex[i]];
+        }
+
+        A = A_sorted;
+
+        /*
+        cout << endl << "Urejeno A po bitu " << bit + 1 << ":" << endl;
+        for (int i = 0; i < A.size(); i++) {
+            cout << (int)A[i] << " ";
+        }
+
+        cout << endl << endl;
+        */
         bit++;
         counter++;
     }
