@@ -29,6 +29,72 @@ void Izpis_Stevil(vector<unsigned char>& polje) {
         output << static_cast<int>(polje[i]) << ' ';
 }
 
+int getMinValue(vector<int> A) {
+    int minVal = A[0];
+    for (int i = 1; i < A.size(); i++)
+    {
+        if (A[i] < minVal)
+        {
+            minVal = A[i];
+        }
+    }
+    return minVal;
+}
+
+int getMaxValue(vector<int> A) {
+    int maxVal = A[0];
+    for (int i = 1; i < A.size(); i++)
+    {
+        if (A[i] > maxVal)
+        {
+            maxVal = A[i];
+        }
+    }
+    return maxVal;
+}
+
+void countingSort(vector<int>& A, vector<int>& Index) {
+    int minVal = getMinValue(A);
+
+    for (int i = 0; i < A.size(); i++)
+    {
+        A[i] = A[i] - minVal;
+    }
+
+    int maxVal = getMaxValue(A);
+    vector<int> C(maxVal + 1, 0);
+
+    for (int i = 0; i < A.size(); i++)
+    {
+        C[A[i]]++;
+    }
+
+    for (int i = 1; i < C.size(); i++)
+    {
+        C[i] = C[i] + C[i - 1];
+    }
+
+    vector<int> B(A.size());
+    vector<int> IndexD(A.size());
+
+    for (int i = A.size() - 1; i >= 0; i--)
+    {
+        B[C[A[i]] - 1] = A[i];
+        IndexD[C[A[i]] - 1] = Index[i];
+        C[A[i]] = C[A[i]] - 1;
+    }
+
+    for (int i = 0; i < B.size(); i++)
+    {
+        B[i] = B[i] + minVal;
+    }
+
+    for (int i = 0; i < B.size(); i++)
+    {
+        A[i] = B[i];
+        Index[i] = IndexD[i];
+    }
+}
 
 int main(int argc, char* argv[])
 {
