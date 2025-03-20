@@ -1,20 +1,69 @@
-// DomacaNaloga1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+
+bool Branje_Stevil(vector<unsigned char>& vec, const char s[]) {
+    ifstream input(s);
+    int st;
+
+    if (!input.is_open()) {
+        return false;
+    }
+
+    while (!input.eof()) {
+        input >> st;
+        vec.push_back(st);
+        while (isspace(input.peek())) input.get();
+    }
+    input.close();
+    return true;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void Izpis_Stevil(vector<unsigned char>& polje) {
+    ofstream output("out.txt");
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    for (int i = 0; i < polje.size(); i++)
+        output << static_cast<int>(polje[i]) << ' ';
+}
+
+
+int main(int argc, char* argv[])
+{
+    vector<unsigned char> A;
+
+    if (argc < 2) return 0;
+    if (!Branje_Stevil(A, argv[1])) return 0;
+
+    int counter = 0;
+    int bit = 0;
+
+    while (counter < 8) {
+        vector<int> D;
+        vector<int> DIndex;
+
+        cout << "Decimalna -> Binarna " << endl;
+        for (int i = 0; i < A.size(); i++) {
+            cout << (int)A[i] << " -> ";
+            for (int k = 7; k >= 0; k--) {
+                cout << ((A[i] >> k) & 1);
+            }
+            cout << endl;
+            
+            D.push_back((A[i] >> bit) & 1);
+            DIndex.push_back(i);
+        }
+
+        
+        bit++;
+        counter++;
+    }
+
+    Izpis_Stevil(A);
+
+    return 0;
+}
+
+
