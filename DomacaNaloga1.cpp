@@ -30,10 +30,40 @@ void Izpis_Stevil(vector<unsigned char>& polje) {
 }
 
 
-int main()
+int main(int argc, char* argv[])
 {
-    cout << "Hello World!"<<endl;
+    vector<unsigned char> A;
+
+    if (argc < 2) return 0;
+    if (!Branje_Stevil(A, argv[1])) return 0;
+
+    int counter = 0;
+    int bit = 0;
+
+    while (counter < 8) {
+        vector<int> D;
+        vector<int> DIndex;
+
+        cout << "Decimalna -> Binarna " << endl;
+        for (int i = 0; i < A.size(); i++) {
+            cout << (int)A[i] << " -> ";
+            for (int k = 7; k >= 0; k--) {
+                cout << ((A[i] >> k) & 1);
+            }
+            cout << endl;
+            
+            D.push_back((A[i] >> bit) & 1);
+            DIndex.push_back(i);
+        }
+
+        
+        bit++;
+        counter++;
+    }
+
+    Izpis_Stevil(A);
 
     return 0;
 }
+
 
