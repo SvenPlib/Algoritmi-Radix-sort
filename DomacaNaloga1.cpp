@@ -29,6 +29,18 @@ void Izpis_Stevil(vector<unsigned char>& polje) {
         output << static_cast<int>(polje[i]) << ' ';
 }
 
+int getMinValue(vector<int> A) {
+    int minVal = A[0];
+    for (int i = 1; i < A.size(); i++)
+    {
+        if (A[i] < minVal)
+        {
+            minVal = A[i];
+        }
+    }
+    return minVal;
+}
+
 
 int main(int argc, char* argv[])
 {
