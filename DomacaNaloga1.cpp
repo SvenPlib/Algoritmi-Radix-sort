@@ -138,6 +138,13 @@ int main(int argc, char* argv[])
         }
 
         cout << endl;
+
+        vector<unsigned char> A_sorted(A.size());
+        for (int i = 0; i < A.size(); i++) {
+            A_sorted[i] = A[DIndex[i]];
+        }
+
+        A = A_sorted;
         
         bit++;
         counter++;
